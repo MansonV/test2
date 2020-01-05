@@ -12,7 +12,6 @@
           </div>
         </div>
       </form>
-      <!-- check boxes -->
       <div id="checkboxes">
       <div v-for="(stack,index) in stacks" :key="index" class="form-check form-check-inline">
         <input class="form-check-input" type="checkbox"  v-model="stack.checked" v-on:change="getfilteredData">
@@ -22,10 +21,12 @@
       </div>    
     </div>
   </div>
-  <!-- end of checkboxes -->
   <div class="card-columns">
-    <!-- iterate data -->
-    <item v-for="(item, index) in filteredData" :key="index" :item="item"></item>
+      <template v-for="(item, index) in filteredData" >
+      <router-link :to="'/item/' + sanitize(item.name)" :key="index">
+        <item-card  :key="index" :item="item"></item-card>
+      </router-link>
+      </template>
    </div>
   </div>
 </template>
